@@ -1,0 +1,91 @@
+ from tkinter import*
+
+from tkinter import ttk
+from tkinter import messagebox
+root=Tk()
+root.title("Automated teller machine")
+root.title("ATM")
+root.geometry("1000x500")
+mynotebook = ttk.Notebook(root)
+mynotebook.pack()
+myframe1=Frame(mynotebook,width=1000,height=500,bg="yellow")
+myframe1.pack()
+l1=[]
+l2=[]
+heading=Label(root,text="Automated teller machine",fg='white',bg='blue',font=('times new roman',30,'bold'))
+heading.place(x=250,y=0)
+heading=Label(root,text="ATM",fg='white',bg='orange',font=('times new roman',30,'bold'))
+heading.place(x=400,y=50)
+
+mynotebook.add(myframe1,text="first tab")
+
+myframe2=Frame(mynotebook,width=1000,height=500,bg="gold")
+myframe2.pack()
+mynotebook.add(myframe2,text="second tab")
+def cal():
+    t=0
+    for i in range(len(l1)):
+       t+=l1[i]    
+    for j in range(len(l2)):
+       t-=l2[j]       
+    #messagebox.showinfo("amount =",t)
+    k=Label(root,text=t,fg='white',bg='black')
+    k.place(x=200,y=450)
+def withdrawal():
+    label3=Label(root,text="enter your amount",fg='white',bg='brown')
+    label3.place(x=300,y=180)
+    amount=Entry(root,width=50,)
+    amount.place(x=300,y=200)
+    def check3():
+         paslabel2=Label(root,text="congrats! your amount withdrawed",fg='white',bg='green',font=('times new roman',30,'bold'))
+         paslabel2.place(x=200,y=350)
+         l2.append(int(amount.get()))
+         label=Button(root,text="see your account",fg='white',bg='purple',font=('times new roman',10,'bold'),command=cal)
+         label.place(x=200,y=400)
+    mybutton=Button(root,text='submit',fg='white',bg='red',command=check3)
+    mybutton.place(x=300,y=290)
+    
+def deposit():
+    label3=Label(root,text="enter your amount",fg='white',bg='brown')
+    label3.place(x=300,y=180)
+    amount=Entry(root,width=50,)
+    amount.place(x=300,y=200)
+    
+    def check2():
+         paslabel2=Label(root,text="congrats! your amount deposited",fg='white',bg='green',font=('times new roman',30,'bold'))
+         paslabel2.place(x=200,y=350)
+         l1.append(int(amount.get()))
+         label=Button(root,text="see your account",fg='white',bg='purple',font=('times new roman',10,'bold'),command=cal)
+         label.place(x=200,y=400)
+         
+    mybutton=Button(root,text='submit',fg='white',bg='red',command=check2)
+    mybutton.place(x=300,y=290)
+    
+def entry():
+    paslabel=Label(root,text="PASSWORD",fg='white',bg='black')
+    paslabel.place(x=300,y=250)
+    password=Entry(root,width=50,)
+    password.place(x=300,y=270)
+    def select():
+       heading.destroy()
+       paslabel.destroy()
+       password.destroy()
+       mybutton.destroy()
+       entrybutton.destroy()
+       mynotebook.select(1)
+       label1=Button(root,text="cash withdrawal",fg='white',bg='blue',font=('times new roman',20,'bold'),command=withdrawal)
+       label1.place(x=200,y=100)
+       label2=Button(root,text="cash deposit",fg='white',bg='blue',font=('times new roman',20,'bold'),command=deposit)
+       label2.place(x=600,y=100)
+
+
+    def check():
+      if(password.get()=='kirti'):
+         select()  
+    mybutton=Button(root,text='submit',fg='white',bg='red',command=check)
+    mybutton.place(x=300,y=290)      
+entrybutton=Button(root,text='banking',fg='white',bg='blue',command=entry)
+entrybutton.place(x=800,y=450)
+
+
+root.mainloop()
